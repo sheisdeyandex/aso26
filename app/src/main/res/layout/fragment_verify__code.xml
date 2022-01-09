@@ -1,188 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    android:background="@drawable/background">
+android:fitsSystemWindows="true"
+    android:id="@+id/ml_verify_code"
+    android:background="@drawable/background"
+    app:layoutDescription="@xml/fragment_verify__code_scene">
 
     <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#CC06002E"
-        />
+        android:background="#CC06002E" />
+
     <ImageView
+        android:id="@+id/iv_logo"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cgl_top_icon"
         android:src="@drawable/logo"
-        android:id="@+id/iv_logo"
-        app:layout_constraintWidth_percent="0.8"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.1"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cgl_top_icon"
+        app:layout_constraintWidth_percent="0.8" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/cgl_top_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05"
-        android:id="@+id/cgl_top_icon"
-        />
+        app:layout_constraintGuide_percent="0.05" />
+
     <ImageView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_logo"
-        android:src="@drawable/registration_slot"
         android:id="@+id/iv_vavada_slot"
-        app:layout_constraintWidth_percent="0.8"
-        app:layout_constraintDimensionRatio="1:1"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_register_and_get"
-        android:textSize="@dimen/_19ssp"
-        android:textColor="@color/white"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@+id/iv_vavada_slot"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_get_100_slots"
-        android:gravity="center_vertical|center"
-        android:textSize="@dimen/_14ssp"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/tv_register_and_get"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        />
-    <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:src="@drawable/registration_slot"
+        app:layout_constraintDimensionRatio="1:1"
+        android:translationY="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_logo"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <TextView
+        android:id="@+id/tv_register_and_get"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_19ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/tv_get_100_slots"/>
+
+    <TextView
+        android:id="@+id/tv_get_100_slots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical|center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_14ssp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cv_enter_phone"
+
+        />
+
+    <androidx.cardview.widget.CardView
         android:id="@+id/cv_enter_phone"
-        app:layout_constraintStart_toEndOf="@+id/cgl_start_cpp"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:cardBackgroundColor="@null"
+        app:cardCornerRadius="30dp"
         app:layout_constraintEnd_toStartOf="@+id/cgl_end_cpp"
         app:layout_constraintHeight_percent="0.07"
-android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_get_100_slots"
-
-        app:cardCornerRadius="30dp"
-        app:cardBackgroundColor="@null"
+android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintStart_toEndOf="@+id/cgl_start_cpp"
+        app:layout_constraintBottom_toTopOf="@+id/cv_register"
 
         >
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+android:layout_gravity="center_vertical|center"
+            android:layout_height="match_parent"
+            android:background="@drawable/gradient_editcpp">
 
-            android:background="@drawable/gradient_editcpp"
-            android:layout_height="match_parent">
             <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/cgl_start_country"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/cgl_start_country"
                 android:orientation="vertical"
-                app:layout_constraintGuide_percent="0.05"
-                />
+                app:layout_constraintGuide_percent="0.05" />
 
             <br.com.sapereaude.maskedEditText.MaskedEditText
                 android:id="@+id/ed_code"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@android:color/transparent"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
+                android:ellipsize="end"
+                android:textAlignment="center"
+                android:gravity="center_vertical|center"
+                android:hint="----"
                 android:inputType="number"
                 android:letterSpacing="1"
-                app:mask="####"
-                android:textSize="@dimen/_35ssp"
-                android:ellipsize="end"
                 android:maxLines="1"
-                android:hint="----"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="@dimen/_30ssp"
                 app:keep_hint="true"
-                />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:mask="####" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
     <androidx.cardview.widget.CardView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
         android:id="@+id/cv_register"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        app:layout_constraintHeight_percent="0.07"
-        app:layout_constraintTop_toBottomOf="@+id/cv_enter_phone"
-        app:layout_constraintStart_toEndOf="@+id/cgl_start_cpp"
-        app:layout_constraintEnd_toStartOf="@+id/cgl_end_cpp"
-        app:cardCornerRadius="30dp"
+        android:layout_marginBottom="@dimen/_10sdp"
         app:cardBackgroundColor="@null"
-        >
+        app:cardCornerRadius="30dp"
+        app:layout_constraintEnd_toStartOf="@+id/cgl_end_cpp"
+        app:layout_constraintHeight_percent="0.07"
+        app:layout_constraintStart_toEndOf="@+id/cgl_start_cpp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_change_number">
+
         <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            app:backgroundTint="@null"
-            android:background="@drawable/register_button_lick"
             android:id="@+id/mb_get_access"
-            android:layout_height="match_parent"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:background="@drawable/register_button_lick"
+            app:backgroundTint="@null" />
     </androidx.cardview.widget.CardView>
+
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/_14ssp"
-        android:textColor="@color/white"
-        android:gravity="center"
         android:id="@+id/tv_change_number"
-        android:layout_marginBottom="@dimen/_5sdp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/tv_recall"
-        />
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="@dimen/_20ssp"
+        android:layout_marginBottom="@dimen/_5sdp"
         android:gravity="center"
         android:textColor="@color/white"
-        android:id="@+id/tv_recall"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/_14ssp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_recall"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_recall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintBottom_toTopOf="@+id/cgl_bottom_privacy"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/cgl_start_cpp"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1"
-        />
-    <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/cgl_bottom_privacy"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.99"
-        />
-    <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.99" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/cgl_get"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95"
-        />
-    <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/cgl_end_cpp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9"
-        />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintGuide_percent="0.9" />
+</androidx.constraintlayout.motion.widget.MotionLayout>

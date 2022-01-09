@@ -16,7 +16,6 @@
         android:theme="@style/Theme.Aso26">
         <activity
             android:name=".ui.MainActivity"
-            android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="stateHidden|adjustResize"
             android:exported="true">
             <intent-filter>

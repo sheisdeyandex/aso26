@@ -25,7 +25,7 @@ class SplashFragment (contextt: Context, uichange: UiChangeInterface): Fragment(
     var contextt: Context
     private var _binding: FragmentSplashBinding? = null
     lateinit var sharedPreference : SharedPreferences
-
+    var accessOffers :Boolean = false
     lateinit var prefs: SharedPreferences
     private val binding get() = _binding!!
     override fun onCreateView(
@@ -37,6 +37,13 @@ class SplashFragment (contextt: Context, uichange: UiChangeInterface): Fragment(
         sharedPreference   = requireActivity().getSharedPreferences("PREFERENCE_SLOTS", Context.MODE_PRIVATE)
         prefs= requireActivity().getSharedPreferences("PREFERENCE_SLOTS", Context.MODE_PRIVATE)
         val editor= sharedPreference.edit()
+        accessOffers = prefs.getBoolean("accessoffers", false)
+if(!accessOffers){
+       registerFragment(editor)}
+
+    return view
+    }
+    fun registerFragment(editor:SharedPreferences.Editor){
         val list:List<ColoredString>
         list= ArrayList()
 
@@ -54,16 +61,16 @@ class SplashFragment (contextt: Context, uichange: UiChangeInterface): Fragment(
                         editor.putString("authenterasguest", response.body()!!.Localization.AuthEnterAsGuest)
                         editor.putString("errorphone", response.body()!!.Localization.ErrorPhone)
                         editor.putString("authgetaccess", response.body()!!.Localization.AuthGetAccess)
-                      setDataFromSharedPreferences("authpolicy",response.body()!!.Localization.AuthPolicy)
-                      setDataFromSharedPreferences("authtitle",response.body()!!.Localization.AuthTitle)
-                      setDataFromSharedPreferences("authsubtitle",response.body()!!.Localization.AuthSubtitle)
+                        setDataFromSharedPreferences("authpolicy",response.body()!!.Localization.AuthPolicy)
+                        setDataFromSharedPreferences("authtitle",response.body()!!.Localization.AuthTitle)
+                        setDataFromSharedPreferences("authsubtitle",response.body()!!.Localization.AuthSubtitle)
                         editor.apply()
                         uichange.show(RegisterFragment(requireContext(), requireActivity() as MainActivity))
 
                     }
-                else{
+                    else{
                         uichange.show(RegisterFragment(requireContext(), requireActivity() as MainActivity))
-                }
+                    }
 
             }
 
@@ -75,8 +82,6 @@ class SplashFragment (contextt: Context, uichange: UiChangeInterface): Fragment(
                 Log.d("sukaerror", t!!.localizedMessage)
             }
         })
-
-    return view
     }
     private fun setDataFromSharedPreferences( key:String,curProduct: ColoredString) {
         val gson = Gson()

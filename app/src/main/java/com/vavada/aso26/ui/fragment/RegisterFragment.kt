@@ -24,10 +24,13 @@ import android.widget.Toast
 import com.vavada.aso26.ApiInterface
 import com.vavada.aso26.UiChangeInterface
 import com.vavada.aso26.models.Action
+import com.vavada.aso26.models.offers.OffersModel
 import com.vavada.aso26.ui.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.vavada.aso26.Utils.KeyboardUtils
+import com.vavada.aso26.Utils.KeyboardUtils.SoftKeyboardToggleListener
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -80,6 +83,17 @@ lateinit var registerandget:String
 
         }
 
+        KeyboardUtils.addKeyboardToggleListener(requireActivity(), object : SoftKeyboardToggleListener {
+            override fun onToggleSoftKeyboard(isVisible: Boolean) {
+                if(isVisible){
+                    binding.mlRegister.transitionToEnd()
+                }
+                else{
+                    binding.mlRegister.transitionToStart()
+                }
+            }
+        })
+
        binding.mbRegister.isClickable=false
 binding.mbRegister.setOnClickListener({
     val phone = (binding.ccpCountryPicker.selectedCountryCodeWithPlus+ binding.mePhone.text.toString())
@@ -114,6 +128,7 @@ binding.mbRegister.setOnClickListener({
             }
         })
     }
+
     private fun setDataFromSharedPreferences( key:String,curProduct: Action) {
         val gson = Gson()
         val jsonCurProduct = gson.toJson(curProduct)

@@ -2,8 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/_120sdp"
+
     android:layout_marginBottom="@dimen/_10sdp"
-    android:background="@drawable/gradient_offers"
+
+    android:background="@drawable/gradient_animation"
+    android:id="@+id/rl_offers"
 
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -24,7 +27,7 @@
       android:layout_height="wrap_content"
       android:orientation="vertical"
       android:id="@+id/cgl_button"
-      app:layout_constraintGuide_percent="0.74"
+      app:layout_constraintGuide_percent="0.7"
       />
   <androidx.constraintlayout.widget.Guideline
       android:layout_width="wrap_content"
@@ -39,6 +42,7 @@
 app:layout_constraintStart_toStartOf="@+id/cgl_button"
       app:strokeWidth="@dimen/_10sdp"
       android:textStyle="bold"
+
       android:background="@drawable/gradient_play_button_full_background"
       android:id="@+id/mb_play"
       app:layout_constraintEnd_toStartOf="@+id/cgl_button_end"
@@ -54,7 +58,7 @@ app:layout_constraintStart_toStartOf="@+id/cgl_button"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/start"
-        app:layout_constraintGuide_percent="0.25"
+        app:layout_constraintGuide_percent="0.15"
         />
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="wrap_content"
@@ -80,6 +84,8 @@ android:layout_margin="@dimen/_10sdp"
         android:layout_height="wrap_content"
         android:id="@+id/iv_emoji_caption_text"
         android:layout_margin="@dimen/_10sdp"
+
+        android:textColor="@color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/iv_emoji_with_caption"
