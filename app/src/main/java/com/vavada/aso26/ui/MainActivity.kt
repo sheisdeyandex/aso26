@@ -3,16 +3,15 @@ package com.vavada.aso26.ui
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
-import com.vavada.aso26.ApiInterface
+import com.vavada.aso26.interfaces.ApiInterface
 import com.vavada.aso26.R
-import com.vavada.aso26.UiChangeInterface
+import com.vavada.aso26.interfaces.UiChangeInterface
 import com.vavada.aso26.models.offers.OffersModel
 import com.vavada.aso26.ui.fragment.FragmentOffers
 import com.vavada.aso26.ui.fragment.SplashFragment
@@ -33,7 +32,6 @@ class MainActivity : AppCompatActivity(), UiChangeInterface {
         prefs= getSharedPreferences("PREFERENCE_SLOTS", Context.MODE_PRIVATE)
         phone = prefs.getString("code", "")+prefs.getString("phone", "")
         accessOffers = prefs.getBoolean("accessoffers", false)
-        Log.d("suka", accessOffers.toString())
         if(accessOffers){
 
        getOffersData()
@@ -75,7 +73,7 @@ setDataFromSharedPreferences("response", response.body())
         })
     }
     override fun show(fragment: Fragment) {
-      supportFragmentManager.beginTransaction().replace(R.id.container, fragment).commit()
+      supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right,0,0).replace(R.id.container, fragment).commit()
 
     }
     private fun setDataFromSharedPreferences(key:String, curProduct: OffersModel?) {

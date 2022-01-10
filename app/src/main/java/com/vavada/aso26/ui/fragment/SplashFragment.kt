@@ -9,8 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
-import com.vavada.aso26.ApiInterface
-import com.vavada.aso26.UiChangeInterface
+import com.vavada.aso26.interfaces.ApiInterface
+import com.vavada.aso26.interfaces.UiChangeInterface
 import com.vavada.aso26.databinding.FragmentSplashBinding
 import com.vavada.aso26.models.ColoredString
 import com.vavada.aso26.models.Config
@@ -58,9 +58,20 @@ if(!accessOffers){
                         editor.putString("countries", response.body()!!.Countries)
                         editor.putString("authpolicyacceptance", response.body()!!.Localization.AuthPolicyAcceptance)
                         editor.putString("errorcode", response.body()!!.Localization.ErrorCode)
+                        editor.putString("errorphone", response.body()!!.Localization.ErrorPhone)
+                        editor.putString("errorserver", response.body()!!.Localization.ErrorServer)
                         editor.putString("authenterasguest", response.body()!!.Localization.AuthEnterAsGuest)
                         editor.putString("errorphone", response.body()!!.Localization.ErrorPhone)
                         editor.putString("authgetaccess", response.body()!!.Localization.AuthGetAccess)
+                        editor.putString("ChangeNumberMessage",
+                            response.body()!!.Localization.ChangeNumberMessage
+                        ).apply()
+                        editor.putString("ChangeNumberNo",
+                            response.body()!!.Localization.ChangeNumberNo
+                        ).apply()
+                        editor.putString("ChangeNumberYes",
+                            response.body()!!.Localization.ChangeNumberYes
+                        ).apply()
                         setDataFromSharedPreferences("authpolicy",response.body()!!.Localization.AuthPolicy)
                         setDataFromSharedPreferences("authtitle",response.body()!!.Localization.AuthTitle)
                         setDataFromSharedPreferences("authsubtitle",response.body()!!.Localization.AuthSubtitle)
@@ -92,6 +103,7 @@ if(!accessOffers){
         editor.apply()
     }
     init {
+
         this.uichange = uichange
         this.contextt = contextt
     }

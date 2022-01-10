@@ -2,6 +2,7 @@ package com.vavada.aso26
 import androidx.multidex.MultiDexApplication
 import com.appsflyer.AppsFlyerLib
 import com.onesignal.OneSignal
+import com.vavada.aso26.interfaces.ApiInterface
 import com.vavada.aso26.models.Config
 import retrofit2.Call
 import retrofit2.Callback

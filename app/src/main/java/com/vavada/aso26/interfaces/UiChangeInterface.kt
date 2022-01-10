@@ -1,4 +1,4 @@
-package com.vavada.aso26
+package com.vavada.aso26.interfaces
 
 import androidx.fragment.app.Fragment
 

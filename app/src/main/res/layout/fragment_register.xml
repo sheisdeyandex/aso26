@@ -70,7 +70,7 @@ android:id="@+id/ml_register"
             android:gravity="center_vertical|center"
             android:textColor="@color/white"
             android:textSize="@dimen/_14ssp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/cv_enter_phone"
@@ -80,8 +80,9 @@ android:id="@+id/ml_register"
             android:id="@+id/cv_enter_phone"
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             app:cardBackgroundColor="@null"
+
             app:cardCornerRadius="30dp"
             app:layout_constraintBottom_toTopOf="@+id/cv_register"
             app:layout_constraintEnd_toStartOf="@+id/cgl_end_cpp"
@@ -90,11 +91,11 @@ android:id="@+id/ml_register"
 
             >
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <LinearLayout
                 android:id="@+id/cl_enter_number"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
+android:orientation="horizontal"
                 android:background="@drawable/gradient_editcpp"
             >
 
@@ -109,6 +110,8 @@ android:id="@+id/ml_register"
                     android:id="@+id/ccp_country_picker"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/_10sdp"
                     app:ccp_autoDetectCountry="true"
                     app:ccp_contentColor="@color/white"
                     app:ccp_showArrow="false"
@@ -118,28 +121,30 @@ android:id="@+id/ml_register"
 
                 <EditText
                     android:id="@+id/me_phone"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/_10sdp"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
                     android:ellipsize="end"
                     android:hint="1234567890"
                     android:inputType="phone"
                     android:maxLines="1"
+                    android:maxLength="13"
                     android:textColor="@color/white"
                     android:textColorHint="#9E9E9E"
                     android:textSize="17sp"
-                    android:typeface="monospace"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/ccp_country_picker"
                     app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_register"
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
-            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
             app:cardBackgroundColor="@null"
             app:cardCornerRadius="30dp"
             app:layout_constraintBottom_toTopOf="@+id/tv_play_as_guest"
@@ -151,6 +156,7 @@ android:id="@+id/ml_register"
                 android:id="@+id/mb_register"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:clickable="false"
                 android:background="@drawable/register_button_lick"
                 android:text="Регистрация"
                 app:backgroundTint="@null" />

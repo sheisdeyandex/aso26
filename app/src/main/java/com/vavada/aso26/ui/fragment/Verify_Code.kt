@@ -7,7 +7,6 @@ import android.os.Handler
 import android.os.Looper
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
-import android.util.Log
 
 import com.google.gson.reflect.TypeToken
 import androidx.fragment.app.Fragment
@@ -16,7 +15,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import com.google.gson.Gson
-import com.vavada.aso26.UiChangeInterface
+import com.vavada.aso26.interfaces.UiChangeInterface
 import com.vavada.aso26.databinding.FragmentVerifyCodeBinding
 import com.vavada.aso26.models.Action
 
@@ -27,18 +26,21 @@ import androidx.ads.identifier.AdvertisingIdClient.getAdvertisingIdInfo
 import androidx.ads.identifier.AdvertisingIdInfo
 import com.appsflyer.AppsFlyerLib
 import com.onesignal.OneSignal
-import com.vavada.aso26.ApiInterface
+import com.vavada.aso26.interfaces.ApiInterface
 import com.vavada.aso26.Utils.KeyboardUtils
+import com.vavada.aso26.interfaces.dialogChangeInterface
 import com.vavada.aso26.models.ColoredString
 import com.vavada.aso26.models.offers.OffersModel
 import com.vavada.aso26.models.verify_phone
 import com.vavada.aso26.ui.MainActivity
+import com.vavada.aso26.ui.dialog.ChangeNumberDialog
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
 import kotlin.concurrent.thread
-class Verify_Code (contextt: Context,uiChangeInterface: UiChangeInterface): Fragment() {
+class Verify_Code (contextt: Context,uiChangeInterface: UiChangeInterface): Fragment(),
+    dialogChangeInterface {
     var uiChangeInterface: UiChangeInterface
     var contextt: Context
     init {
@@ -74,6 +76,7 @@ class Verify_Code (contextt: Context,uiChangeInterface: UiChangeInterface): Frag
     lateinit var prefs: SharedPreferences
     private val binding get() = _binding!!
     lateinit var  phone: String
+    lateinit var  editor:SharedPreferences.Editor
     var fullAccess :Boolean = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -83,7 +86,7 @@ class Verify_Code (contextt: Context,uiChangeInterface: UiChangeInterface): Frag
         val view= binding.root
         sharedPreference   = requireActivity().getSharedPreferences("PREFERENCE_SLOTS", Context.MODE_PRIVATE)
         prefs= requireActivity().getSharedPreferences("PREFERENCE_SLOTS", Context.MODE_PRIVATE)
-        val editor = sharedPreference.edit()
+         editor = sharedPreference.edit()
         phone = prefs.getString("code", "")+prefs.getString("phone", "")
         KeyboardUtils.addKeyboardToggleListener(requireActivity(), object :
             KeyboardUtils.SoftKeyboardToggleListener {
@@ -96,6 +99,10 @@ class Verify_Code (contextt: Context,uiChangeInterface: UiChangeInterface): Frag
                 }
             }
         })
+        val changenumber = ChangeNumberDialog(requireContext(),
+            prefs.getString("ChangeNumberMessage", "")!!,
+            prefs.getString("ChangeNumberNo","")!!, prefs.getString("ChangeNumberYes","")!!, this)
+        binding.tvChangeNumber.setOnClickListener { changenumber.show(parentFragmentManager,"") }
         fullAccess = prefs.getBoolean("fullaccess", false)
         binding.mbGetAccess.text =prefs.getString("authgetaccess", "")
 binding.tvRegisterAndGet.setColoredText(getDataFromSharedPreferences("nextcaption").title(phone, "#fff"))
@@ -233,5 +240,12 @@ binding.mbGetAccess.setOnClickListener({
         val type = object : TypeToken<Action>() {}.type
         productFromShared = gson.fromJson(jsonPreferences, type)
         return productFromShared
+    }
+
+    override fun show(context: Context) {
+        if(isAdded){
+            editor.putString("back", null).apply()
+            uiChangeInterface.show(RegisterFragment(requireContext(), requireActivity() as MainActivity))}
+
     }
 }

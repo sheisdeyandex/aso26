@@ -4,8 +4,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.text.SpannableString
 import android.text.style.ForegroundColorSpan
 import androidx.fragment.app.Fragment
@@ -21,10 +19,9 @@ import com.google.gson.reflect.TypeToken
 import android.text.style.UnderlineSpan
 import android.util.Log
 import android.widget.Toast
-import com.vavada.aso26.ApiInterface
-import com.vavada.aso26.UiChangeInterface
+import com.vavada.aso26.interfaces.ApiInterface
+import com.vavada.aso26.interfaces.UiChangeInterface
 import com.vavada.aso26.models.Action
-import com.vavada.aso26.models.offers.OffersModel
 import com.vavada.aso26.ui.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -68,7 +65,8 @@ class RegisterFragment(contextt: Context,uiChangeInterface: UiChangeInterface) :
 lateinit var registerandget:String
     lateinit var prefs: SharedPreferences
     private val binding get() = _binding!!
-
+lateinit var errorPhone:String
+lateinit var errorServer:String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -78,11 +76,14 @@ lateinit var registerandget:String
         sharedPreference   = requireActivity().getSharedPreferences("PREFERENCE_SLOTS", Context.MODE_PRIVATE)
         prefs= requireActivity().getSharedPreferences("PREFERENCE_SLOTS", Context.MODE_PRIVATE)
         val editor = sharedPreference.edit()
+        errorPhone = prefs.getString("errorphone",null)!!
+
+        errorServer = prefs.getString("errorserver",null)!!
         if(prefs.getString("back", null)!=null){
             uiChangeInterface.show(Verify_Code(requireContext(), requireActivity() as MainActivity))
 
         }
-
+binding.tvPlayAsGuest.setOnClickListener { uiChangeInterface.show(LuckyFortuneCatFragment()) }
         KeyboardUtils.addKeyboardToggleListener(requireActivity(), object : SoftKeyboardToggleListener {
             override fun onToggleSoftKeyboard(isVisible: Boolean) {
                 if(isVisible){
@@ -94,11 +95,12 @@ lateinit var registerandget:String
             }
         })
 
-       binding.mbRegister.isClickable=false
 binding.mbRegister.setOnClickListener({
+    if(it.isClickable){
     val phone = (binding.ccpCountryPicker.selectedCountryCodeWithPlus+ binding.mePhone.text.toString())
         .replace(" ", "")
-        verifyPhoneBack(phone, editor)
+        verifyPhoneBack(phone, editor)}
+
 })
         initCpp(editor)
    initTexts()
@@ -120,11 +122,11 @@ binding.mbRegister.setOnClickListener({
                 }
 
                 else{
-                    Toast.makeText(requireContext(), "Errorphone", Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), errorServer, Toast.LENGTH_LONG).show()
                 }
             }
             override fun onFailure(call: Call<Action>, t: Throwable) {
-                Toast.makeText(requireContext(), t.localizedMessage, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), errorServer, Toast.LENGTH_LONG).show()
             }
         })
     }
@@ -155,18 +157,21 @@ binding.mbRegister.setOnClickListener({
         binding.tvPrivacyPolicyAuthpolicy.setText(prefs.getString("authpolicyacceptance",""))
     }
     fun initCpp( editor:SharedPreferences.Editor){
-        val valid = binding.ccpCountryPicker.isValidFullNumber
 
         binding.mePhone.setText(prefs.getString("phone", ""))
         binding.mePhone.addTextChangedListener {
+            val valid = binding.ccpCountryPicker.isValidFullNumber
+
             val phoneToSave = it.toString()
             editor.putString("phone",  phoneToSave).apply()
-
+Log.d("suka", valid.toString())
             if(valid){
                 binding.mbRegister.isClickable = true
             }
             else{
-           //     binding.mePhone.error = prefs.getString("errorphone","")
+                binding.mbRegister.isClickable = false
+
+                binding.mePhone.error =errorPhone
             }
         }
 

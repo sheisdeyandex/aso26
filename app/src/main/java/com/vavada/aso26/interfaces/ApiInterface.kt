@@ -1,10 +1,8 @@
-package com.vavada.aso26
+package com.vavada.aso26.interfaces
 
 import com.vavada.aso26.models.Action
 import com.vavada.aso26.models.Config
 import com.vavada.aso26.models.offers.OffersModel
-import com.vavada.aso26.models.offers.offerslist.Offers
-import com.vavada.aso26.models.offers.offerslist.OffersListModel
 import com.vavada.aso26.models.verify_phone
 import retrofit2.Call
 import retrofit2.Retrofit
